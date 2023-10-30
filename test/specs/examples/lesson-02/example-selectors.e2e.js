@@ -50,7 +50,7 @@ describe('Czechitas Login Page', async () => {
         /*
         CSS Selectors: attribute
          */
-        const nameAttributeSelector = $('[name="email"]');
+        ;
         console.log(await nameAttributeSelector.getHTML());
 
         const typeAttributeSelector = $('[type="password"]');

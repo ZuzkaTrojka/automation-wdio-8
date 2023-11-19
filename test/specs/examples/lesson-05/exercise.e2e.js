@@ -1,12 +1,13 @@
 /**
  * Lesson 5: Assertions
  */
-import {username, password, userFullName, expectedApplicationsPageRows} from '../../fixtures.js'
+import {username, password, userFullName, expectedApplicationsPageRows} from './fixtures.js'
 
 describe('Login Page', async () => {
 
     beforeEach(async () => {
         await browser.reloadSession();
+        
         await browser.url('/prihlaseni');
     });
 

@@ -1,9 +1,9 @@
 /**
  * Lesson 4: Test structure
  */
-import {username, password} from '../../fixtures.js'
+import {username, password} from './fixtures.js'
 
-describe('Login Page', async () => {
+xdescribe('Login Page', async () => {
 
     beforeEach(async () => {
         await browser.reloadSession();

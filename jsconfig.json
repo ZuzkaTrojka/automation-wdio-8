@@ -3,5 +3,5 @@
       "**/*.js",
       "**/*.json",
       "node_modules/expect-webdriverio"
-    ]
+, "test/exercise"    ]
   }

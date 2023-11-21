@@ -1,6 +1,5 @@
 import fs from 'fs';
-import deepmerge from 'deepmerge';
-import {config as baseConfig} from '../../../../wdio.conf.js';
+
 
 const passedDirectory = 'screenshots/passed';
 const failedDirectory = 'screenshots/failed';

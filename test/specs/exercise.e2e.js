@@ -2,6 +2,11 @@
 
 xdescribe('Overeni registrace - asertace ', async () => {
 
+    beforeEach(async () => {
+        await browser.reloadSession();
+        await browser.url('/prihlaseni');
+    });
+
     it('Assertace - overeni registrovaneho uzivatele ', async () => {
 
         await browser.reloadSession();
@@ -30,7 +35,7 @@ xdescribe('Overeni registrace - asertace ', async () => {
         const userNameDropdown = $('.navbar-right').$('[data-toggle="dropdown"]');
 
         await nameField.setValue('Ebinka Psice');
-        await emailField.setValue('Ebinkapinclice1234567890@seznam.cz');
+        await emailField.setValue('Ebinkapinclice12345678901@seznam.cz');
         await passwordField.setValue('Password1');
         await confirmPassword.setValue('Password1');
         await buttonField.click();
@@ -44,7 +49,12 @@ xdescribe('Overeni registrace - asertace ', async () => {
 
 // test 3
 
-describe('Overeni registrace', async () => {
+xdescribe('Overeni registrace', async () => {
+
+    beforeEach(async () => {
+        await browser.reloadSession();
+        await browser.url('/prihlaseni');
+    });
 
     it('overeni registrace jiz existujiciho emailu ', async () => {
 
@@ -69,14 +79,55 @@ describe('Overeni registrace', async () => {
         await expect(navbarRight).toHaveText('Přihlásit', { timeout: 5000 });
         await expect(Upozorneni).toHaveText('Účet s tímto emailem již existuje');
         await expect(toastMessage).toHaveText('Některé pole obsahuje špatně zadanou hodnotu');
-       
-       console.log('Upozornění: ' + await Upozorneni.getText());
-       console.log('Toast message: ' + await toastMessage.getText());
+
+        console.log('Upozornění: ' + await Upozorneni.getText());
+        console.log('Toast message: ' + await toastMessage.getText());
 
 
     });
 
 })
 
-// test 4
+describe('Overeni registrace', async () => {
 
+    beforeEach(async () => {
+        await browser.reloadSession();
+        await browser.url('/prihlaseni');
+        expect($('#H1').toHaveText('Přihldfafášení'));
+
+    });
+
+    it('registrace s nevyhovujicim heslem ', async () => {
+
+        await browser.reloadSession();
+        await browser.url('/registrace');
+
+        const nameField = await $('#name');
+        await expect(nameField).toBeDisplayed();
+
+        const emailField = await $('#email');
+        await expect(emailField).toBeDisplayed();
+
+        const passwordField = await $('#password');
+        await expect(emailField).toBeDisplayed();
+        const confirmPassword = await $('#password-confirm');
+        await expect(emailField).toBeDisplayed();
+        const buttonField = await $('.btn-primary');
+        await expect(buttonField).toHaveText('Zaregistrovat');
+        const Upozorneni = $('.invalid-feedback');
+        const toastMessage = $('.toast-message');
+        const navbarRight = $('.navbar-right');
+        await nameField.setValue("Zuzka.Trojanova");
+        await emailField.setValue("Ebinka2121@czechitas.cz");
+        await passwordField.setValue('1111');
+        await confirmPassword.setValue('1111');
+        await buttonField.click();
+        await expect(navbarRight).toHaveText('Přihlásit', { timeout: 6000 });
+        await expect(Upozorneni).toHaveText('Heslo musí obsahovat minimálně 6 znaků, velké i malé písmeno a číslici');
+        await expect(toastMessage).toHaveText('Některé pole obsahuje špatně zadanou hodnotu');
+        //console.log('Upozornení: ' + await Upozorneni.getText());
+        //console.log('Upozornění: ' + await toastMessage.getText());
+    });
+
+})
+// test 4

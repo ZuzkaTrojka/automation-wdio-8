@@ -1,7 +1,7 @@
 /**
  * Lesson 7: Code organization - Exercise 2
  */
-import {username, password, expectedApplicationsPageRows} from '../../fixtures.js'
+import {username, password, expectedApplicationsPageRows} from './fixtures.js'
 
 async function openLoginPage() {
     await browser.reloadSession();

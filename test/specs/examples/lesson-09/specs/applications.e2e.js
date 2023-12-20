@@ -1,7 +1,7 @@
 /**
  * Lesson 9: Page Object Pattern - Exercise 4
  */
-import {username, password, expectedApplicationsPageRows} from '../../../fixtures.js'
+import {username, password, expectedApplicationsPageRows} from './fixtures.js'
 import LoginPage from '../pages/login.page.js';
 import ApplicationsPage from '../pages/applications.page.js';
 

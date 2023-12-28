@@ -1,21 +1,7 @@
-import fs from 'fs';
 import {ReportAggregator} from 'wdio-html-nice-reporter';
-const passedDirectory = 'screenshots/passed';
-const failedDirectory = 'screenshots/failed';
+
 const reportsDirectory = './reports/html-reports/';
 
-
-function createIfNotExists(dir) {
-    if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir, { recursive: true });
-    }
-}
-
-function deleteFiles(dir) {
-    fs.rm(dir, { recursive: true }, err => {
-        if (err) console.log(err);
-    });
-}
 export const config = {
     // automationProtocol: 'devtools',
     runner: 'local',
@@ -47,7 +33,7 @@ export const config = {
         'goog:chromeOptions': {
             args: [
                 '--window-size=1920,1080',
-                //'--headless',
+                '--headless',
                 '--no-sandbox',
                 '--disable-gpu',
                 '--disable-setuid-sandbox',
@@ -58,7 +44,7 @@ export const config = {
         "moz:firefoxOptions": {
             // flag to activate Firefox headless mode (see https://github.com/mozilla/geckodriver/blob/master/README.md#firefox-capabilities for more details about moz:firefoxOptions)
             args: [
-                '-headless'
+                // '-headless'
             ]
         }
     }],
@@ -73,9 +59,6 @@ export const config = {
         'geckodriver'
     ],
     framework: 'mocha',
-    /*
-    Konfigurace reportování
-     */
     reporters: [
         'spec',
         ["html-nice", {
@@ -88,21 +71,25 @@ export const config = {
             collapseTests: false,
             //to turn on screenshots after every test
             useOnAfterCommandForScreenshot: true
-        }],
+        }]
     ],
     mochaOpts: {
         ui: 'bdd',
         timeout: 60000
     },
+
+    /*
+    Definice potřebných hooků
+    */
     onPrepare: (config, capabilities) => {
         let reportAggregator = new ReportAggregator({
             outputDir: reportsDirectory,
             filename: 'report.html',
             reportTitle: 'Czechitas Test Automation',
-            browserName: capabilities.browserName,
+            browserName : capabilities.browserName,
             collapseTests: true,
         });
-        reportAggregator.clean();
+        reportAggregator.clean() ;
         global.reportAggregator = reportAggregator;
     },
     onComplete: async (exitCode, config, capabilities, results) => {
@@ -112,5 +99,4 @@ export const config = {
         const screenshotName = (`./.tmp/${test.parent}__${test.title}.png`).replace(/ /g, '_');
         await browser.saveScreenshot(screenshotName);
     }
-
 }

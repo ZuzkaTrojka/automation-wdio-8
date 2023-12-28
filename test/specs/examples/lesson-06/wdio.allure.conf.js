@@ -2,7 +2,7 @@ import fs from 'fs';
 import allure from 'allure-commandline';
 import video from 'wdio-video-reporter';
 import deepmerge from "deepmerge";
-import {config as baseConfig} from '../../../../wdio.conf.js';
+import {config as baseConfig} from './wdio.conf.js';
 
 const allureTmpDirectory = './.tmp/allure';
 const allureReportDirectory = './reports/allure';

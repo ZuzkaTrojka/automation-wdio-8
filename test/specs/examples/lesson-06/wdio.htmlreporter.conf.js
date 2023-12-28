@@ -6,7 +6,7 @@ const reportsDirectory = './reports/html-reports/';
 
 export const config = deepmerge(baseConfig, {
     specs: [
-        '../lesson-05*/*.e2e.js'
+        './lesson-05*/*.e2e.js'
     ],
 
     /*

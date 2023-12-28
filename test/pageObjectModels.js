@@ -1,5 +1,3 @@
-import { userFullName } from "../specs/fixtures";
-
 class LoginPage {
 
     constructor() {
@@ -8,6 +6,7 @@ class LoginPage {
     get NameField() { return $('#name'); }
     get emailField() { return $('#email'); }
     get passwordField() { return $('#password'); }
+    get confirmPasswordField() { return $('#password-confirm'); }
     get loginButton() { return $('.btn-primary'); }
     get fieldError() { return $('.invalid-feedback'); }
     get toast() { return $('.toast-message'); }
@@ -20,13 +19,14 @@ class LoginPage {
         await browser.url(this.url);
     }
 
-    async login(userFullName,username, password) {
+    async login(userFullName,username, password,confirmPasswordField) {
         await this.NameField.setValue(userFullName);
         await this.emailField.setValue(username);
         await this.passwordField.setValue(password);
+        await this.confirmPasswordField.setValue(password);
         await this.loginButton.click();
     }
-
+    
     async logout() {
         await this.userNameDropdown.click();
         await this.logoutLink.click();
@@ -43,7 +43,7 @@ class LoginPage {
     async getToastMessage() {
         return await this.toast.getText();
     }
-
+ 
 }
 
 export default new LoginPage();

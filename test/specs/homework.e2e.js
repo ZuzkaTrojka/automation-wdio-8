@@ -43,14 +43,14 @@ describe('Overeni registrace', async () => {
         await expect(getAllert()).toHaveText('Heslo musí obsahovat minimálně 6 znaků, velké i malé písmeno a číslici');
         await expect(getRightNavbar()).toHaveText('Přihlásit', { timeout: 6000 });
     });
-    afterEach(async () => {
+    
+    it('Test, který provede ověření odhlášení uživatele',async () => {
         await RegistrationPage.open();
         await RegistrationPage.login(userFullName, generateRandomEmail(), password);
         await expect(await RegistrationPage.getCurrentUser()).toEqual(userFullName);
         await RegistrationPage.logout()
         await expect(await RegistrationPage.userNameDropdown.isDisplayed()).toBeFalsy();
         await expect(await RegistrationPage.navbarRight.getText()).toEqual('Přihlásit');
-
     });
 });
 

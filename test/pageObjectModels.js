@@ -1,4 +1,4 @@
-class LoginPage {
+class RegistrationPage {
 
     constructor() {
         this.url = '/registrace';
@@ -46,4 +46,4 @@ class LoginPage {
  
 }
 
-export default new LoginPage();
+export default new RegistrationPage();
